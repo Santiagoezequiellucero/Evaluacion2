@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,44 +20,51 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView mensaje;
     private Button btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nombre = (EditText) findViewById(R.id.txtNombre);
-        pass = (EditText)findViewById(R.id.txtPass);
+//        nombre = (EditText) findViewById(R.id.txtNombre);
+//        pass = (EditText)findViewById(R.id.txtPass);
         progressBar = (ProgressBar)findViewById(R.id.progressbar);
         mensaje = (TextView)findViewById(R.id.txtMensaje);
         btn = (Button)findViewById(R.id.btnIngresar);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                new Task().execute();
+                if (loginConfirmation()) {
+                    new Task().execute();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         progressBar.setVisibility(View.INVISIBLE);
     }
-
+    private boolean loginConfirmation() {
+        nombre = (EditText) findViewById(R.id.txtNombre);
+        pass = (EditText) findViewById(R.id.txtPass);
+        return (nombre.getText().toString().equalsIgnoreCase("android") && pass.getText().toString().equalsIgnoreCase("123"));
+    }
     class Task extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
-            mensaje.setText("");
-            String a =nombre.getText().toString();
-            String b =pass.getText().toString();
-            String c = mensaje.getText().toString();
-            if(a.equalsIgnoreCase("Android") && b.equals("123")){
+            //mensaje.setText("");
+            //String a =nombre.getText().toString();
+            //String b =pass.getText().toString();
+            //String c = mensaje.getText().toString();
+            //if(a.equalsIgnoreCase("Android") && b.equals("123")){
                 progressBar.setVisibility(View.VISIBLE);
-            }
-            else {
-                mensaje.setText(" usuario o contraseña incorrecto\n");
-                nombre.setText("");
-                pass.setText("");
-            }
+            //}
+            //else {
+              //  mensaje.setText(" usuario o contraseña incorrecto\n");
+              //  nombre.setText("");
+              //  pass.setText("");
+              //  return;
+            //}
          }
 
         @Override
@@ -76,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
 
             Intent i = new Intent(getBaseContext(), HomeAct.class);
+
             startActivity(i);
         }
     }
