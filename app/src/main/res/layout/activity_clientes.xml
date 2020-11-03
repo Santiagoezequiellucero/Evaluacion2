@@ -67,24 +67,28 @@
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="AddClientes"
             android:text="Guardar Cliente" />
 
         <Button
             android:id="@+id/btnMostrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="ShowClientes"
             android:text="Mostrar cliente" />
 
         <Button
             android:id="@+id/btnEliminar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="DeleteClientes"
             android:text="eliminar cliente" />
 
         <Button
             android:id="@+id/btnActualizar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="UpdateClientes"
             android:text="actualizar cliente" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
