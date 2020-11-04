@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import java.util.HashMap;
+
 public class HomeAct extends AppCompatActivity {
 
     private ViewFlipper slider;
@@ -49,7 +51,11 @@ public class HomeAct extends AppCompatActivity {
 
     public void Prestamos (View v)
     {
+        HashMap<String,Integer> hashClientes = new HashMap<>();
         Intent i = new Intent(this, PrestamosAct.class);
+        hashClientes.put("Axel",750000);
+        hashClientes.put("Roxana",900000);
+        i.putExtra("Clientes",hashClientes);
         startActivity(i);
     }
 
